@@ -1,0 +1,24 @@
+﻿@model KnockoutSamples.ViewModels.PersonViewModel
+
+@{
+    ViewBag.Title = "MvcViewModel";
+}
+
+<script type="text/javascript">
+    $(function () {
+        function ViewModel() {
+            this.firstName = ko.observable("@Model.FirstName");
+            this.lastName = ko.observable("@Model.LastName");
+        }
+
+        ko.applyBindings(new ViewModel());
+    });
+</script>
+
+<h2>Mvc View Model</h2>
+
+<p>Who are you?
+<br />First: <input data-bind="value: firstName" />
+<br />Last: <input data-bind="value: lastName" />
+</p>
+<p>Hello <span data-bind="text: firstName"></span> <span data-bind="text: lastName"></span>!</p>

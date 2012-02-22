@@ -1,0 +1,38 @@
+﻿@model List<KnockoutSamples.ViewModels.PersonViewModel>
+
+@{
+    ViewBag.Title = "MvcListViewModel";
+}
+
+<script type="text/javascript">
+    $(function () {
+        var data = [
+        @for(int i = 0; i < Model.Count; i++)
+        {
+            var item = Model[i];
+            if (i > 0)
+            {
+            <text>,</text>
+            }
+            <text>
+            { firstName: ko.observable("@item.FirstName"),
+              lastName: ko.observable("@item.LastName"),
+              age: ko.observable(@item.Age)
+            }
+            </text>
+        }
+        ];
+
+        function ViewModel() {
+            this.names = ko.observableArray(data);
+        }
+
+        ko.applyBindings(new ViewModel());
+    });
+</script>
+
+<h2>MVC ViewModel Complex List</h2>
+
+<ul data-bind="foreach: names">
+    <li><span data-bind="text: $data.firstName"></span> <span data-bind="text: $data.lastName"></span> (<span data-bind="text: $data.age"></span>)</li>
+</ul>

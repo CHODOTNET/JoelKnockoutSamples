@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "EditableList";
+}
+
+<script type="text/javascript">
+    $(function () {
+        var data = [
+            { firstName: ko.observable("Jim"),
+                lastName: ko.observable("Jones"),
+                age: ko.observable(42)
+            },
+            { firstName: ko.observable("Roger"),
+                lastName: ko.observable("Rabbit"),
+                age: ko.observable(12)
+            },
+            { firstName: ko.observable("Allison"),
+                lastName: ko.observable("Wonder"),
+                age: ko.observable(30)
+            }];
+
+        function ViewModel() {
+            this.names = ko.observableArray(data);
+        }
+
+        ko.applyBindings(new ViewModel());
+    });
+</script>
+
+<h2>Editable List</h2>
+
+<ul data-bind="foreach: names">
+    <li>First: <input data-bind="value: $data.firstName" /> Last: <input data-bind="value: $data.lastName" /> Age: <input data-bind="value: $data.age" /></li>
+</ul>
+
+<p>Current values:</p>
+<ul data-bind="foreach: names">
+    <li><span data-bind="text: $data.firstName"></span> <span data-bind="text: $data.lastName"></span> (<span data-bind="text: $data.age"></span>)</li>
+</ul>

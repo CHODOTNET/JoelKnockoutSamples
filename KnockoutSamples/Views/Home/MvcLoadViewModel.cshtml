@@ -1,0 +1,25 @@
+﻿@model KnockoutSamples.ViewModels.PeopleViewModel
+
+@{
+    ViewBag.Title = "MvcLoadViewModel";
+}
+
+<script type="text/javascript">
+    $(function () {
+        var data = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Model));
+        var viewModel = ko.mapping.fromJS(data);
+
+        viewModel.FullName = ko.computed(function() {
+            
+        });
+
+        ko.applyBindings(viewModel);
+    });
+</script>
+
+<h2>MVC Load ViewModel</h2>
+
+<h3 data-bind="text: Category"></h3>
+<ul data-bind="foreach: People">
+    <li><span data-bind="text: $data.FirstName"></span> <span data-bind="text: $data.LastName"></span> (<span data-bind="text: $data.Age"></span>)</li>
+</ul>

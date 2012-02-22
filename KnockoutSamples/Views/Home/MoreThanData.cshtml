@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "MoreThanData";
+}
+
+<script type="text/javascript">
+    $(function () {
+        var data = [
+            { firstName: ko.observable("Jim"),
+                lastName: ko.observable("Jones"),
+                age: ko.observable(42)
+            },
+            { firstName: ko.observable("Roger"),
+                lastName: ko.observable("Rabbit"),
+                age: ko.observable(12)
+            },
+            { firstName: ko.observable("Allison"),
+                lastName: ko.observable("Wonder"),
+                age: ko.observable(30)
+            }];
+
+        function ViewModel() {
+            this.names = ko.observableArray(data);
+
+            this.firstNameToAdd = ko.observable();
+            this.lastNameToAdd = ko.observable();
+            this.ageToAdd = ko.observable();
+
+            this.isNameValid = ko.computed(function () {
+                return !(this.firstNameToAdd() == undefined || this.lastNameToAdd() == undefined || this.ageToAdd() == undefined
+                         || this.firstNameToAdd() === "" || this.lastNameToAdd() === "" || this.ageToAdd() == NaN || this.ageToAdd() <= 0);
+            }, this);
+
+//            this.addName = function () {
+//                this.names.push(new {ko.observable(this.firstNameToAdd()), ko.observable(this.lastNameToAdd()), ko.observable(this.ageToAdd())});
+//                this.firstNameToAdd("");
+//                this.lastNameToAdd("");
+//                this.ageToAdd(0);
+//            };
+        }
+
+        ko.applyBindings(new ViewModel());
+    });
+</script>
+
+<h2>More than data</h2>
+<p>Who do you want to add?
+<br />First: <input data-bind="value: firstNameToAdd" /> Last: <input data-bind="value: lastNameToAdd" /> Age: <input data-bind="value: ageToAdd" />
+<!-- <br /><button data-bind="click: addName()">Add</button> -->
+</p>
+
+<p data-bind="visible: isNameValid">Hello <span data-bind="text: firstNameToAdd"></span> <span data-bind="text: lastNameToAdd"></span>!</p>
+
+<p>Current values:</p>
+<ul data-bind="foreach: names">
+    <li><span data-bind="text: $data.firstName"></span> <span data-bind="text: $data.lastName"></span> (<span data-bind="text: $data.age"></span>)</li>
+</ul>
+
+

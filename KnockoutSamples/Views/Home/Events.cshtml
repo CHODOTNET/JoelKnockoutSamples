@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Events";
+}
+
+<script type="text/javascript">
+    $(function () {
+        function ViewModel() {
+            this.firstName = ko.observable();
+            this.lastName = ko.observable();
+
+            this.fullName = ko.computed(function () {
+                if (this.firstName() != undefined && this.lastName() != undefined) {
+                    return this.firstName() + " " + this.lastName();
+                }
+            }, this);
+
+            this.swapNames = function () {
+                if (this.firstName() != undefined && this.lastName() != undefined) {
+                    var name1 = this.firstName();
+                    var name2 = this.lastName();
+                    this.firstName(name2);
+                    this.lastName(name1);
+                }
+            };
+        }
+
+        ko.applyBindings(new ViewModel());
+    });
+</script>
+
+<h2>Events</h2>
+
+<p>Who are you?
+<br />First: <input data-bind="value: firstName" />
+<br />Last: <input data-bind="value: lastName" />
+</p>
+<p>Hello <span data-bind="text: fullName"></span>!</p>
+<p><button data-bind="click: swapNames">Swap 'em!</button></p>

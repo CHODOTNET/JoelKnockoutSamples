@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "ComplexList";
+}
+
+<script type="text/javascript">
+    $(function () {
+        var data = [
+            {firstName: "Jim",
+             lastName: "Jones",
+             age: 42},
+            {firstName: "Roger",
+             lastName: "Rabbit",
+             age: 12},
+            {firstName: "Allison",
+             lastName: "Wonder",
+             age: 30}];
+
+        function ViewModel() {
+            this.names = ko.observableArray(data);
+        }
+
+        ko.applyBindings(new ViewModel());
+    });
+</script>
+
+<h2>Complex List</h2>
+
+<ul data-bind="foreach: names">
+    <li data-bind="text: $data.firstName"></li>
+</ul>

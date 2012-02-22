@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Simple";
+}
+
+<script type="text/javascript">
+    $(function () {
+        function ViewModel() {
+            this.firstName = "Joel";
+            this.lastName = "Cochran";
+        }
+
+        ko.applyBindings(new ViewModel());
+    });
+</script>
+
+<h2>Simple Knockout Sample</h2>
+
+<p>Hello <span data-bind="text: firstName"></span> <span data-bind="text: lastName"></span>!</p>

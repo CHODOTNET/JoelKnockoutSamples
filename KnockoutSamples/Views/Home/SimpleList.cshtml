@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "SimpleList";
+}
+
+<script type="text/javascript">
+    $(function () {
+        var data = ["Jim", "Roger", "Allison", "Sarah"];
+
+        function ViewModel() {
+            this.names = ko.observableArray(data);
+        }
+
+        ko.applyBindings(new ViewModel());
+    });
+</script>
+
+<h2>Simple List</h2>
+
+<ul data-bind="foreach: names">
+    <li data-bind="text: $data"></li>
+</ul>

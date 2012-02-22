@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "SimpleComputed";
+}
+
+<script type="text/javascript">
+    $(function () {
+        function ViewModel() {
+            this.firstName = ko.observable();
+            this.lastName = ko.observable();
+
+            this.fullName = ko.computed(function () {
+                if (this.firstName() != undefined && this.lastName() != undefined) {
+                    return this.firstName() + " " + this.lastName();
+                }
+            }, this);
+        }
+
+        ko.applyBindings(new ViewModel());
+    });
+</script>
+
+<h2>Simple Computed Knockout Sample</h2>
+
+<p>Who are you?
+<br />First: <input data-bind="value: firstName" />
+<br />Last: <input data-bind="value: lastName" />
+</p>
+<p>Hello <span data-bind="text: fullName"></span>!</p>
